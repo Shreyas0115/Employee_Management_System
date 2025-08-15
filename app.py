@@ -1,17 +1,22 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "secret123"   # Secret key for sessions
+app.secret_key = os.getenv("SECRET_KEY")
 
-# Database connection
 def get_db():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",        # Change this to your MySQL username
-        password="root",    # Change this to your MySQL password
-        database="employee_db"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASS"),
+        database=os.getenv("DB_NAME")
     )
+
 
 # Home / Login Page
 @app.route('/')
