@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Employee Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h2>👨‍💼 Employee Management - Admin</h2>
+        <nav>
+            <a href="/add_employee" class="btn">➕ Add Employee</a>
+            <a href="/logout" class="btn-logout">🚪 Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Salary</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in employees %}
+                <tr>
+                    <td>{{ emp.id }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.email }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>₹{{ emp.salary }}</td>
+                    <td>
+                        <a href="/update_employee/{{ emp.id }}" class="btn-edit">✏ Edit</a>
+                        <a href="/delete_employee/{{ emp.id }}" class="btn-delete">🗑 Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
